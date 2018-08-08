@@ -27,13 +27,15 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
+	@Autowired
 	private ApplicationEventPublisher publisher;
 
-	@GetMapping
-	public List<Categoria> listar() {
-		return categoriaRepository.findAll();
-
-	}
+	
+//	@GetMapping
+//	public List<Categoria> listar() {
+//		return categoriaRepository.findAll();
+//
+//	}
 
 	 @PostMapping
 	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
