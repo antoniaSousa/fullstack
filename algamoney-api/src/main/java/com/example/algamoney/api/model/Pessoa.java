@@ -7,8 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
@@ -21,6 +24,7 @@ public class Pessoa {
 	public Long getCodigo() {
 		return codigo;
 	}
+
 	@Embedded
 	private Endereco endereco;
 
@@ -37,19 +41,11 @@ public class Pessoa {
 	}
 
 	private String nome;
-	
-	private boolean ativo;
-    
-	 public boolean isAtivo() {
-		return ativo;
-	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
+	private boolean ativo;
 
 	@NotNull
-	 @Size(min = 3, max = 20)
+	@Size(min = 3, max = 20)
 	public String getNome() {
 		return nome;
 	}
@@ -58,5 +54,46 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	@JsonIgnore
+	@Transient
+	public boolean isInativo() {
+		return !this.ativo;
+
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pessoa other = (Pessoa) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
+	
 
 }
