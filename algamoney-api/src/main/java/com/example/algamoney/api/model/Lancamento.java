@@ -24,30 +24,35 @@ public class Lancamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		return result;
-	}
+	@NotNull
+	private String descricao;
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Lancamento other = (Lancamento) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		return true;
-	}
+	@NotNull
+	@Column(name = "data_vencimento")
+	private LocalDate dataVencimento;
+
+	@Column(name = "data_pagamento")
+	private Date dataPagamento;
+
+	@NotNull
+	private BigDecimal valor;
+
+	private String observacao;
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private TipoLacamento tipo;
+
+	@ManyToOne
+	@JoinColumn(name = "codigo_categoria")
+	private Categoria categoria;
+
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "codigo_pessoa")
+	private Pessoa pessoa;
+
+
 
 	public Long getCodigo() {
 		return codigo;
@@ -121,31 +126,28 @@ public class Lancamento {
 		this.pessoa = pessoa;
 	}
 
-	private String descricao;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
 
-	@NotNull
-	@Column(name = "data_vencimento")
-	private LocalDate dataVencimento;
-
-	@Column(name = "data_pagamento")
-	private Date dataPagamento;
-
-	@NotNull
-	private BigDecimal valor;
-
-	private String observacao;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private TipoLacamento tipo;
-
-	@ManyToOne
-	@JoinColumn(name = "codigo_categoria")
-	private Categoria categoria;
-	
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "codigo_pessoa")
-	private Pessoa pessoa;
-
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Lancamento other = (Lancamento) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
 }

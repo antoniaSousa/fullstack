@@ -1,4 +1,4 @@
-package com.example.algamoney.api.listener;
+package com.example.algamoney.api.event.listener;
 
 import java.net.URI;
 

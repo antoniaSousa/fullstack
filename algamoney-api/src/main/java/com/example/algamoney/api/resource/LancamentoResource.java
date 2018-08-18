@@ -25,7 +25,7 @@ import com.example.algamoney.api.exceptionhandler.AlgaMoneyExceptionHandler.Erro
 import com.example.algamoney.api.model.Lancamento;
 import com.example.algamoney.api.repository.LancamentoRepository;
 import com.example.algamoney.api.service.LancamentoService;
-import com.example.algamoney.api.service.exception.PessoaInexistenteOuInativa;
+import com.example.algamoney.api.service.exception.PessoaInexistenteOuInativaException;
 
 @RestController
 @RequestMapping("/lancamento")
@@ -33,9 +33,11 @@ public class LancamentoResource {
 
 	@Autowired
 	private MessageSource messageSource;
+	
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
-
+ 
+	@Autowired
 	private LancamentoService lancamentoService;
 
 	@Autowired
@@ -62,10 +64,11 @@ public class LancamentoResource {
 
 	}
 
-	@ExceptionHandler({ PessoaInexistenteOuInativa.class })
-	public ResponseEntity<Object> handlePessoaInexistenteOuInativaException(PessoaInexistenteOuInativa ex) {
+	@ExceptionHandler({ PessoaInexistenteOuInativaException.class })
+	public ResponseEntity<Object> handlePessoaInexistenteOuInativaException(PessoaInexistenteOuInativaException ex) {
 
-		String mensagemUsuario = messageSource.getMessage("pessoa.inexistente-ou-inativa", null, LocaleContextHolder.getLocale());
+		String mensagemUsuario = messageSource.getMessage("pessoa.inexistente-ou-inativa", null,
+				LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return ResponseEntity.badRequest().body(erros);
