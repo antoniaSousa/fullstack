@@ -41,7 +41,7 @@ public class Lancamento {
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	private TipoLacamento tipo;
+	private TipoLancamento tipo;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria")
@@ -102,11 +102,11 @@ public class Lancamento {
 		this.observacao = observacao;
 	}
 
-	public TipoLacamento getTipo() {
+	public TipoLancamento getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoLacamento tipo) {
+	public void setTipo(TipoLancamento tipo) {
 		this.tipo = tipo;
 	}
 
