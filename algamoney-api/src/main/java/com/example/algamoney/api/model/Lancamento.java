@@ -2,8 +2,6 @@ package com.example.algamoney.api.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

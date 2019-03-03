@@ -40,10 +40,11 @@ import com.example.algamoney.api.service.exception.PessoaInexistenteOuInativaExc
 public class LancamentoResource {
 
 	@Autowired
+	private LancamentoRepository lancamentoRepository;
+	
+	@Autowired
 	private MessageSource messageSource;
 
-	@Autowired
-	private LancamentoRepository lancamentoRepository;
 	@Autowired
 	private LancamentoRepositoryQuery lancamentoRepositoryQuery;
 	@Autowired
