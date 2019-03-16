@@ -1,3 +1,22 @@
+target/
+.classpath
 .metadata/
 .recommenders/
 .project
+.settings
+.springeans
+
+
+## Intellij IDEA ##
+.idea
+*.iws
+*.iml
+*.ipr
+
+## netbeans##
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
